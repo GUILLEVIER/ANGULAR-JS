@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplos</title>
+  </head>
+  <style>
+    div {
+      transition: all linear 0.5s;
+      background-color: lightblue;
+      height: 100px;
+      width: 100%;
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+    .ng-hide {
+      height: 0;
+      width: 0;
+      background-color: transparent;
+      top: -200px;
+      left: 200px;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+  <body>
+    <div
+      ng-app="myApp"
+      ng-controller="myCtrl"
+      ng-init='quantity=1; cost=5; firstName="Guillermo"'
+    >
+      <p>The name is <span ng-bind="firstName"></span></p>
+      <p>The lastname is <span ng-bind="lastname"></span></p>
+      {{ firstName + " " + lastName }}
+      <p>{{ value }}</p>
+      <p>Total in dollar: {{ quantity * cost }}</p>
+      <label for="FirstName">
+        First Name:
+        <input
+          id="FirstName"
+          name="FirstName"
+          type="text"
+          ng-model="firstName"
+        />
+      </label>
+      <label for="SecondName">
+        Last Name:
+        <input
+          id="SecondName"
+          name="SecondName"
+          type="text"
+          ng-model="lastName"
+        />
+      </label>
+      <h1>Hide the DIV</h1>
+      <input type="checkbox" ng-model="myCheck" />
+      <div ng-hide="myCheck" />
+      <input ng-model="name" />
+      <p ng-show="true">I am visible.</p>
+      <p ng-show="false">I am not visible.</p>
+    </div>
+
+    <div ng-app="myApp" ng-controller="personCtrl">
+      <p>The name is {{ lastName | uppercase }}</p>
+    </div>
+
+    <div ng-app="myApp">
+      <a href="#/!">Main</a>
+      <a href="#!red">Red</a>
+      <a href="#!green">Green</a>
+      <a href="#!blue">Blue</a>
+    </div>
+    <div ng-view></div>
+
+    <div ng-app="myApp" ng-controller="myCtrl">
+      <ul>
+        <li ng-repeat="user in users">{{ user.name + ', ' + user.phone }}</li>
+      </ul>
+    </div>
+
+    <div ng-app="" ng-init="mySwitch=true">
+      <div>
+        <button ng-disabled="mySwitch">Click Me!</button>
+        <input type="checkbox" ng-model="mySwitch" />
+      </div>
+      <p>{{ mySwitch }}</p>
+    </div>
+  </body>
+  <script>
+    const app = angular.module('myApp', ['ngAnimate', 'ngRoute'])
+    app.controller('myCtrl', function ($scope, $http) {
+      $scope.firstname = 'Guillermo'
+      $scope.lastname = 'Morales'
+      $scope.a = 1
+      $scope.b = 2
+      $scope.value = $scope.$eval('a + b')
+      $scope.name = 'Karla Ramirez'
+      $http
+        .get('https://jsonplaceholder.typicode.com/users')
+        .then(function (response) {
+          $scope.users = response.data
+        })
+    })
+    app.controller('personCtrl', function ($scope) {
+      $scope.name = 'Guillermo Morales'
+      $scope.firstName = 'Guillermo'
+      $scope.lastName = 'Morales'
+    })
+    app.config(function ($routeProvider) {
+      $routeProvider
+    })
+  </script>
+</html>
