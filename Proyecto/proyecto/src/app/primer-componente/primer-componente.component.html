@@ -1,0 +1,18 @@
+<h1>{{ name }} - <span [ngStyle]="{color: favoriteColor}">{{ favoriteColor }}</span></h1>
+<h1>{{ name }} - <span [ngStyle]="colorStyles">{{ favoriteColor }}</span></h1>
+
+<button
+  class='btn btn-waves'
+  (click) = "handleDetailsView()"
+>Details
+</button>
+<input
+  (change) = "handleNameChange($event)"
+  type="text"
+  placeholder="Ingrese un nuevo nombre"
+/>
+<input
+  (change) = "handleColorChange($event)"
+  type="text"
+  placeholder="Ingrese un nuevo color"
+>

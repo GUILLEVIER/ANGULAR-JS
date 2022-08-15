@@ -1,0 +1,149 @@
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <input type="text" placeholder="Search city" name="'city" [(ngModel)]="cityName">
+  </form>
+</div>
+
+<div class="container" *ngIf="weatherData">
+  <div class="upper-data">
+    <figure>
+      <img src="../assets/Noche.png" alt="" *ngIf="weatherData.main.temp <= 15">
+      <img src="../assets/Día.png" alt="" *ngIf="weatherData.main.temp > 15">
+    </figure>
+    <div class="weather-data">
+      <div class="location">
+        {{ weatherData.name }}
+      </div>
+      <div class="temperature">
+        {{ weatherData.main.temp | number: '1.0-0' }} °C
+      </div>
+    </div>
+  </div>
+  <div class="lower-data">
+    <div class="more-info-label">
+      More Information
+    </div>
+    <div class="more-info-container">
+      <div class="info-block">
+        <div class="info-block-label">
+          <figure>
+            <img src="../assets/Min.png" alt="">
+          </figure>
+          <span>min</span>
+        </div>
+        <div class="info-block-value">
+          {{ weatherData.main.temp_min | number: '1.0-0' }} °C
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <figure>
+            <img src="../assets/Max.png" alt="">
+          </figure>
+          <span>max</span>
+        </div>
+        <div class="info-block-value">
+          {{ weatherData.main.temp_max | number: '1.0-0' }} °C
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <figure>
+            <img src="../assets/Humidity.png" alt="">
+          </figure>
+          <span>humidity</span>
+        </div>
+        <div class="info-block-value">
+          {{ weatherData.main.humidity }} %
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <figure>
+            <img src="../assets/Wind.png" alt="">
+          </figure>
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">
+          {{ weatherData.wind.speed }} km / hr
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="upper-data">
+    <figure>
+      <img src="../assets/Noche.png" alt="">
+    </figure>
+    <div class="weather-data">
+      <div class="location">
+        Wellington
+      </div>
+      <div class="temperature">
+        {{ 14.40 | number: '1.0-0' }}°C
+      </div>
+    </div>
+  </div>
+  <div class="lower-data">
+    <div class="more-info-label">
+      More Information
+    </div>
+    <div class="more-info-container">
+      <div class="info-block">
+        <div class="info-block-label">
+          <figure>
+            <img src="../assets/Min.png" alt="">
+          </figure>
+          <span>min</span>
+        </div>
+        <div class="info-block-value">
+          10°C
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <figure>
+            <img src="../assets/Max.png" alt="">
+          </figure>
+          <span>max</span>
+        </div>
+        <div class="info-block-value">
+          40°C
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <figure>
+            <img src="../assets/Humidity.png" alt="">
+          </figure>
+          <span>humidity</span>
+        </div>
+        <div class="info-block-value">
+          80%
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <figure>
+            <img src="../assets/Wind.png" alt="">
+          </figure>
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">
+          10 km/hr
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+<router-outlet></router-outlet>

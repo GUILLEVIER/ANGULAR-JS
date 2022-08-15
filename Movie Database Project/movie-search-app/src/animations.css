@@ -1,0 +1,73 @@
+:root{
+    --animation-speed:.63s;
+    --animation-speed-slow:.83s;
+    --animation-speed-slower:1.2s;
+    --animation-speed-slowest:1.43s;
+}
+
+.fade-in-left{
+    opacity: 0;
+    animation: 1.374s ease-out fade-in-left;
+    animation-fill-mode: forwards;
+}
+
+.fade-in-right{
+    opacity: 0;
+    animation: .75s ease-in fade-in-right;
+    animation-fill-mode: forwards;
+}
+
+.fade-in-bottom{
+    opacity: 0;
+    animation: .75s ease-in fade-in-bottom;
+    animation-fill-mode: forwards;
+}
+.slow{
+    animation-delay: var(--animation-speed-slow);
+}
+.slower{
+    animation-delay: var(--animation-speed-slower);
+}
+.slowest{
+    animation-delay: var(--animation-speed-slowest);
+}
+
+@keyframes fade-in-left{
+    0%{
+        opacity:0;
+        transform:translateX(150px) 
+    }
+    60%{
+        opacity: .4
+    }
+    100%{
+        opacity:1;
+        transform:translateX(0)
+    }
+}
+@keyframes fade-in-right{
+    0%{
+        opacity:0;
+        transform:translateX(-150px) 
+    }
+    60%{
+        opacity: .4
+    }
+    100%{
+        opacity:1;
+        transform:translateX(0)
+    }
+}
+@keyframes fade-in-bottom{
+    0%{
+        opacity:0;
+        transform:translateY(150px) 
+    }
+    60%{
+        opacity: .4
+    }
+    100%{
+        opacity:1;
+        transform:translateX(0)
+    }
+}

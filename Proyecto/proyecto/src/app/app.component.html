@@ -1,0 +1,75 @@
+<div class='container'>
+  <h1 uppercase>{{ title }}</h1>
+  <h2 *ifNot="title" uppercase>No title yet</h2>
+  <img [src]='gif' [alt]='gifAlt'>
+  <input type="text" placeholder="title" [(ngModel)]="title">
+
+  <primer-componente [name]="person1.name" [favoriteColor]="person1.favoriteColor"
+    (detailsView)="seeDetails(person1.name)" (nameChange)="changeNamePerson1($event)"
+    (colorChange)="changeColorPerson1($event)"></primer-componente>
+
+  <primer-componente [name]="person2.name" [favoriteColor]="person2.favoriteColor"
+    (detailsView)="seeDetails(person2.name)" (nameChange)="changeNamePerson2($event)"
+    (colorChange)="changeColorPerson2($event)"></primer-componente>
+
+  <h2 uppercase>
+    {{ checkActivePersons() ? 'Active persons' : 'No active persons' }}
+  </h2>
+  <ng-template ngFor let-person [ngForOf]="persons">
+    <segundo-componente *ngIf="person.active" [name]="person.name" [rut]="person.rut"
+      [phone_number]="person.phone_number" [date_of_birth]="person.date_of_birth"
+      [marital_status]="person.marital_status">
+    </segundo-componente>
+  </ng-template>
+
+  <div class="collection">
+    <div *ngFor="let person of persons" [ngClass]="['collection-item', 'red']">
+      {{ person.name }}
+    </div>
+    <div *ngFor="let person of persons" [ngClass]="'collection-item red'">
+      {{ person.name }}
+    </div>
+    <div *ngFor="let person of persons"
+      [ngClass]="{'collection-item': true, 'red': !person.active, 'green': person.active}">
+      {{ person.name }}
+    </div>
+    <div *ngFor="let person of persons" [ngClass]="listStyle(person)">
+      {{ person.name }}
+    </div>
+  </div>
+
+  <div class="col s3">
+    <div [ngClass]="cardStyle('count')" (click)="setDisplay('count')">
+      <div class="card-content white-text">
+        <div class="card-title">
+          Number of persons
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s3">
+    <div [ngClass]="cardStyle('active')" (click)="setDisplay('active')">
+      <div class="card-content white-text">
+        <div class="card-title">
+          Number of persons actives
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s3">
+    <div [ngClass]="cardStyle('color')" (click)="setDisplay('color')">
+      <div class="card-content white-text">
+        <div class="card-title">
+          Person colors
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+<!--
+  Otras opcines son:
+  name="person2.name"
+  [(name)]="person2.name"
+-->

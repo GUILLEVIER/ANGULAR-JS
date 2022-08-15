@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+html, body{
+    color:rgb(233, 230, 233);
+    background: linear-gradient(#000 10%, #333 20%, #000 30%);
+    background-size: 100% 50px;
+}
+app-root {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.movie-poster{
+    width: 100%;
+    opacity: 0;
+    
+}
+
+.search-btn{
+    cursor: pointer;
+    margin-top:15px;
+
+}
+.search-input{
+    height: 6rem !important;
+    top:20px;
+    font-size: 6rem !important;
+}
+
+.page-footer{
+    background-color: #333 !important;
+}
+
+.movie{
+    opacity: 0;
+    font-size: 1.5em;
+    line-height: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    animation: .75s ease-in slide-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-in{
+    0%{
+        opacity:0;
+        transform:translateY(-15px) 
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0)
+    }
+}
