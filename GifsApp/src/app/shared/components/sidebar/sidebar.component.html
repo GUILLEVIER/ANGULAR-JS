@@ -1,0 +1,17 @@
+<div
+  class="bg-dark border-right p-3 {{ showSidebar }}"
+  style="transition: all ease-in-out 0.5s"
+  id="sidebar"
+>
+  <h3 class="text-light">GifsApp</h3>
+  <hr class="text-white" />
+  <div class="list-group list-reset">
+    <button
+      (click)="updateGifs(tag)"
+      *ngFor="let tag of tags"
+      class="list-group-item list-group-item-action"
+    >
+      {{ tag | titlecase }}
+    </button>
+  </div>
+</div>

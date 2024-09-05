@@ -1,0 +1,88 @@
+<div class="content-login">
+  <shared-loader class="shared-loader" *ngIf="isLoading"></shared-loader>
+  <div
+    class="row d-flex justify-content-center align-items-center"
+    style="height: 80vh"
+  >
+    <div class="col-xl-10">
+      <div class="card rounded-3 text-black">
+        <div class="row g-0">
+          <div class="col-lg-6">
+            <div class="card-body p-md-5 mx-md-4">
+              <div class="text-center mt-3">
+                <img
+                  [src]="'assets/basketball.svg'"
+                  style="width: 100px"
+                  alt="logo"
+                />
+                <h4 class="mt-1 mb-5 pb-1">Scoreboard</h4>
+              </div>
+              <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <div class="form-outline mb-4">
+                  <label class="mb-2">Ingresar correo</label>
+                  <input
+                    type="email"
+                    class="form-control mb-2"
+                    placeholder="correo@correo.com"
+                    formControlName="email"
+                    (input)="onChangeInput('email')"
+                    matInput
+                    required=""
+                  />
+                  <p class="text-danger mb-0">{{ errorsUser.email }}</p>
+                  <label class="mb-2">Ingresar contraseña</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="**********"
+                    formControlName="password"
+                    (input)="onChangeInput('password')"
+                    matInput
+                    required=""
+                  />
+                  <p class="text-danger mb-0">{{ errorsUser.password }}</p>
+                </div>
+                <div class="text-center pt-1 mb-5 pb-1 d-flex flex-column">
+                  <button
+                    (click)="onLogin()"
+                    class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                    type="button"
+                  >
+                    Iniciar Sesión
+                  </button>
+                  <a class="text-muted" href="#!">¿Olvidaste tu contraseña?</a>
+                </div>
+                <div
+                  class="d-flex align-items-center justify-content-center pb-4"
+                >
+                  <p class="mb-0 me-2">¿No tienes cuenta?</p>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger"
+                    (click)="onClickCreateAccount()"
+                  >
+                    Crear cuenta
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+              <h4 class="mb-4">Bienvenidos a Scoreboard</h4>
+              <p class="small mb-0">
+                ¿Necesitas obtener un marcador para tu equipo de baloncesto?.
+                Creamos Scoreboard con el fin de ayudar a los equipos a poder
+                obtener un registro de sus partidos. Podrás acceder al tablero
+                el cual obtendras la cantidad de puntos por equipo, faltas y
+                tiempos de espera. El tablero es totalmente táctil, podrás
+                agregar puntos, agregar contador inicial en minutos, etc. Te
+                damos la bienvenida y esperamos que te diviertas!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div
+  *ngIf="this.value && !disabledClick && !clickPause"
+  class="content-arrow play-pause"
+>
+  <mat-icon
+    fontIcon="navigate_before"
+    class="arrow-icon"
+    (click)="this.onClickBackArrow()"
+  ></mat-icon>
+  <span class="spacer"></span>
+  <mat-icon
+    fontIcon="navigate_next"
+    class="arrow-icon"
+    (click)="this.onClickNextArrow()"
+  ></mat-icon>
+</div>

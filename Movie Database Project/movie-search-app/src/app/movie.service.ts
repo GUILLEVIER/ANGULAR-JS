@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { Subject } from "rxjs";
 import { Movie } from './Movie'
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { ThisReceiver } from "@angular/compiler";
+import { map } from "rxjs/operators";
+
 
 @Injectable()
 export class MovieService {
@@ -22,13 +22,14 @@ export class MovieService {
 
   searchMovie(query: string) {
     const params = new HttpParams().set('api_key', this.apiKey).set('query', query)
-    return this.http.get<any>(this.baseApiURL, { params }).map(res => res.results.map((result: Movie) => {
+    return this.http.get<any>(this.baseApiURL, { params }).pipe(map(res => res.results.map((result: Movie) => {
       return {
         ...result,
-        backdropURL: this.createPhotoURL(result.backdrop_path, true),
-        posterURL: this.createPhotoURL(result.poster_path, false)
+        backdropURL: this.createPhotoURL(result.backdrop_path || '', true),
+        posterURL: this.createPhotoURL(result.poster_path || '', false)
       }
     }))
+    )
   }
 
   changeSelectedMovie(movie: Movie) {
@@ -37,7 +38,7 @@ export class MovieService {
 
   setImageConfiguration() {
     const params = new HttpParams().set('api_key', this.apiKey)
-    this.http.get<any>(this.baseConfigurationURL, { params }).map(res => res).subscribe((config: any) => {
+    this.http.get<any>(this.baseConfigurationURL, { params }).pipe(map(res => res)).subscribe((config: any) => {
       this.imageBaseURL = config.images.base_url
       this.imageSizes = {
         backdrop: config.images.backdrop_sizes,

@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>¿Estas seguro de eliminar a {{ data.superhero }}?</h2>
+<mat-dialog-content>Si lo eliminas no podrá ser recuperado.</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancelar</button>
+  <button color="warn" mat-button (click)="confirmDialog()" cdkFocusInitial>
+    Eliminar
+  </button>
+</mat-dialog-actions>

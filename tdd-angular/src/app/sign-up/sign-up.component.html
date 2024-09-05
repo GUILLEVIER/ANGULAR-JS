@@ -1,0 +1,83 @@
+<div 
+  class="col-lg-6 offset-lg-3 col-md-8 offset-md-2"
+  *ngIf="!signUpSuccess; else successMessage"
+  data-testid="sign-up-page"
+  >
+  <div class="card" data-testid="form-sign-up">
+    <div class="card-header text-center">
+      <h1>Sign Up</h1>
+    </div>
+    <form 
+      class="card-body" 
+      (ngSubmit)="onClickSignUp()"
+      [formGroup]="form"
+      >
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input id="username"
+        class="form-control"
+        [ngClass]="usernameError ? 'is-invalid' : '' "
+        formControlName="username"
+        />
+        <div data-testid="username-validation"
+        class="invalid-feedback"
+          *ngIf="usernameError">
+          {{usernameError}}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input id="email" class="form-control"
+        [ngClass]="emailError ? 'is-invalid' : '' "
+        formControlName="email"
+        />
+        <div data-testid="email-validation"
+        class="invalid-feedback"
+          *ngIf="emailError">
+          {{emailError}}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" 
+        class="form-control"
+        [ngClass]="passwordError ? 'is-invalid' : '' "
+        type="password"
+        formControlName="password"
+        />
+        <div data-testid="password-validation"
+        class="invalid-feedback"
+          *ngIf="passwordError">
+          {{passwordError}}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="passwordRepeat" class="form-label">Password Repeat</label>
+        <input id="passwordRepeat"
+        class="form-control"
+        [ngClass]="passwordRepeatError ? 'is-invalid' : '' "
+        type="password"
+        formControlName="passwordRepeat"
+        />
+        <div data-testid="passwordRepeat-validation"
+        class="invalid-feedback"
+          *ngIf="passwordRepeatError">
+          {{passwordRepeatError}}
+        </div>
+      </div>
+      <div class="text-center">
+        <app-button
+          [disabled]="isDisabled()"
+          [apiProgress]="apiProgress"
+        >
+          Sign Up
+        </app-button>
+      </div>
+    </form>
+  </div>
+</div>
+<ng-template #successMessage>
+  <app-alert>
+    Please check your e-mail to activate your account
+  </app-alert>
+</ng-template>

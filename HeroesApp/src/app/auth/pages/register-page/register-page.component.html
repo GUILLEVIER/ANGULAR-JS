@@ -1,0 +1,42 @@
+<shared-loader *ngIf="hasLoaded" [serviceName]="'Nuevo usuario'" />
+
+<div class="flex flex-column" *ngIf="!hasLoaded">
+  <span class="text-lg mb-4">Resgistro</span>
+  <mat-form-field>
+    <mat-label>Usuario</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="Nombre de usuario"
+      [formControl]="usernameInput"
+      (input)="onChangeUsernameInput()"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="Nombre"
+      [formControl]="nameInput"
+      (input)="onChangeNameInput()"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Contraseña</mat-label>
+    <input
+      type="password"
+      matInput
+      placeholder="Contraseña"
+      [formControl]="passwordInput"
+      (input)="onChangePasswordInput()"
+    />
+  </mat-form-field>
+  <button mat-button mat-flat-button color="primary" (click)="onAddUser()">
+    <mat-icon>save</mat-icon>
+    Ingresar
+  </button>
+  <div class="flex justify-content-end mt-5">
+    <a routerLink="/auth/login">¿Ya tienes cuenta?</a>
+  </div>
+</div>

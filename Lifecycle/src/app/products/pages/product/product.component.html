@@ -1,0 +1,5 @@
+<p>product works!</p>
+<products-price *ngIf="productChange" [price]="changePrice" />
+
+<button (click)="productChange = !productChange">Toggle</button>
+<button (click)="increasePrice()">+1</button>

@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-header text-center">
+    <h3>Users</h3>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li
+      class="list-group-item list-grou-item-action"
+      *ngFor="let user of page.content"
+      (click)="navigate(user.id)"
+    >
+    <app-user-list-item [user]="user"></app-user-list-item>
+    </li>
+  </ul>
+  <div class="card-footer text-center">
+    <button
+      *ngIf="hasPreviousPage && !fetchingData"
+      (click)="loadData(page.page - 1)"
+      data-testid="previous-button"
+      class="btn btn-outline-secondary btn-sm float-start"
+    >
+      &lt; previous
+    </button>
+    <button *ngIf="hasNextPage && !fetchingData"
+    (click)="loadData(page.page + 1)"
+    class="btn btn-outline-secondary btn-sm float-end"
+    data-testid="next-button">
+      next &gt;
+    </button>
+    <span 
+      *ngIf="fetchingData"
+      class="spinner-border spinner-border-sm"
+      role="status"></span>
+  </div>
+</div>

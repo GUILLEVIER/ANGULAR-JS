@@ -1,0 +1,10 @@
+<div class="d-flex">
+  <!-- Sidebar -->
+  <shared-sidebar [showSidebar]="showSide"></shared-sidebar>
+  <gifs-home-page
+    [showSidebar]="showSide"
+    (variableChanged)="showSidebar('')"
+    class="flex-fill"
+  ></gifs-home-page>
+  <!-- Home Page -->
+</div>

@@ -1,0 +1,12 @@
+<div class="row" style="position: relative">
+  <gifs-card
+    *ngFor="let gif of gifs"
+    (showCardClick)="showCardClick($event)"
+    [gif]="gif"
+    class="col-md-3 col-sm-6"
+  ></gifs-card>
+</div>
+
+<div *ngIf="showSide">
+  <gifs-modal [gif]="gif"></gifs-modal>
+</div>

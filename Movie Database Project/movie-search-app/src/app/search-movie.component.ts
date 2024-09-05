@@ -16,11 +16,23 @@ export class SearchMovieComponent implements OnInit {
   search: string = ''
   constructor(private movieService: MovieService) { }
 
+  /*
   ngOnInit(): void {
     this.search$.debounceTime(500).pipe(map(query => {
       this.fetching = true
       return query
     })).subscribe(this.searchQuery.bind(this))
+  }
+  */
+
+  ngOnInit(): void {
+    this.search$.pipe(
+      debounceTime(500),
+      map(query => {
+        this.fetching = true;
+        return query;
+      })
+    ).subscribe(this.searchQuery.bind(this));
   }
 
   searchQuery(query: string) {

@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "user": "Alexander Ortiz",
+      "email": "alexander@correo.com"
+    },
+    {
+      "id": "2",
+      "username": "Jorge Rojas",
+      "email": "jorge@correo.com"
+    },
+    {
+      "id": "3",
+      "username": "Ignacio Tapia",
+      "email": "ignacio@correo.com"
+    }
+  ]
+}

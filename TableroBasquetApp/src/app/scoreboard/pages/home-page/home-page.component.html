@@ -1,0 +1,164 @@
+<div class="home-page">
+  <shared-loader class="shared-loader" *ngIf="isLoading"></shared-loader>
+  <scoreboard-score-modal
+    *ngIf="showScoreModal && !isLoading"
+    class="score-modal"
+    [title]="'Ingresar minutos'"
+    [inputValue]="minutes"
+    (showCloseModal)="onClickShowCloseModal($event)"
+  ></scoreboard-score-modal>
+  <scoreboard-add-score-modal
+    *ngIf="addScoreModal && !isLoading"
+    title="¿Deseás guardar este marcador?"
+    class="score-modal"
+    (acceptModal)="onClickAcceptAddScoreModal()"
+    (cancelModal)="onClickAcceptCancelScoreModal()"
+  />
+  <div class="d-flex flex-column w-100 content-home">
+    <div class="w-100 text-center header">
+      <div class="d-flex flex-column">
+        <h1 *ngIf="!this.homeTeam.showInput" (click)="onClickTeam('home')">
+          {{ homeTeam.name | titlecase }}
+        </h1>
+        <input
+          class="inputTitle"
+          *ngIf="this.homeTeam.showInput"
+          placeholder="Ingresar Equipo Local"
+          (blur)="onClickTeam('home')"
+          (keydown)="onKeydownTeam($event, 'home')"
+          value=""
+          (change)="onChangeTeamName($event, 'home')"
+        />
+        <span (click)="!clickPause && this.onClickNextHome()">{{
+          score.home.toString().padStart(2, "0")
+        }}</span>
+        <scoreboard-add-substract-arrow
+          [value]="this.score.home > 0"
+          [disabledClick]="score.disabledClick"
+          [clickPause]="clickPause"
+          (backArrow)="this.onClickBackHome()"
+          (nextArrow)="this.onClickNextHome()"
+        />
+      </div>
+      <div class="d-flex flex-column tap-to-start">
+        <h1 *ngIf="this.changeTitle" (click)="this.onStop()">DETENER</h1>
+        <h1 *ngIf="!this.changeTitle" (click)="this.onClickTapToStart(minutes)">
+          CLIC PARA COMENZAR
+        </h1>
+        <span class="initial-counter" (click)="this.showModalCountdown()">{{
+          this.countdown
+        }}</span>
+        <div *ngIf="showPlayPause" class="content-arrow play-pause">
+          <mat-icon
+            *ngIf="!this.clickPause"
+            class="arrow-icon"
+            fontIcon="pause"
+            (click)="this.onClickPause()"
+          ></mat-icon>
+          <mat-icon
+            *ngIf="this.clickPause"
+            class="arrow-icon"
+            fontIcon="play_arrow"
+            (click)="this.onClickPlay()"
+          ></mat-icon>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <h1 *ngIf="!this.visitTeam.showInput" (click)="onClickTeam('visit')">
+          {{ visitTeam.name | titlecase }}
+        </h1>
+        <input
+          *ngIf="this.visitTeam.showInput"
+          class="inputTitle"
+          placeholder="Ingresar Equipo Visita"
+          (blur)="onClickTeam('visit')"
+          (keydown)="onKeydownTeam($event, 'visit')"
+          name="homeTeamName"
+          (change)="onChangeTeamName($event, 'visit')"
+        />
+        <span (click)="!clickPause && this.onClickNextVisit()">{{
+          score.visit.toString().padStart(2, "0")
+        }}</span>
+        <scoreboard-add-substract-arrow
+          [value]="this.score.visit > 0"
+          [disabledClick]="score.disabledClick"
+          [clickPause]="clickPause"
+          (backArrow)="this.onClickBackVisit()"
+          (nextArrow)="this.onClickNextVisit()"
+        />
+      </div>
+    </div>
+    <div class="w-100 text-center body">
+      <div class="d-flex flex-column fouls">
+        <h1>FOULS</h1>
+        <span (click)="!clickPause && this.onClickNextFoulsHome()">{{
+          fouls.foulsHome.toString().padStart(2, "0")
+        }}</span>
+        <scoreboard-add-substract-arrow
+          [value]="this.fouls.foulsHome > 0"
+          [disabledClick]="score.disabledClick"
+          [clickPause]="clickPause"
+          (backArrow)="this.onClickBackFoulsHome()"
+          (nextArrow)="this.onClickNextFoulsHome()"
+        />
+      </div>
+      <div class="d-flex flex-column">
+        <span class="counter">{{ alertCountdown }}</span>
+      </div>
+      <div class="d-flex flex-column fouls">
+        <h1>FOULS</h1>
+        <span (click)="!clickPause && this.onClickNextFoulsVisit()">{{
+          fouls.foulsVisit.toString().padStart(2, "0")
+        }}</span>
+        <scoreboard-add-substract-arrow
+          [value]="this.fouls.foulsVisit > 0"
+          [disabledClick]="score.disabledClick"
+          [clickPause]="clickPause"
+          (backArrow)="this.onClickBackFoulsVisit()"
+          (nextArrow)="this.onClickNextFoulsVisit()"
+        />
+      </div>
+    </div>
+    <div class="w-100 text-center body">
+      <div class="d-flex flex-column fouls">
+        <h1 class="timeout">TIMEOUTS</h1>
+        <span (click)="!clickPause && this.onClickNextTimeoutHome()">{{
+          timeouts.timeoutsHome.toString().padStart(2, "0")
+        }}</span>
+        <scoreboard-add-substract-arrow
+          [value]="this.timeouts.timeoutsHome > 0"
+          [disabledClick]="score.disabledClick"
+          [clickPause]="clickPause"
+          (backArrow)="this.onClickBackTimeoutHome()"
+          (nextArrow)="this.onClickNextTimeoutHome()"
+        />
+      </div>
+      <div class="d-flex flex-column period">
+        <h1 class="period-title">PERIOD</h1>
+        <span (click)="!clickPause && this.onClickNextPeriod()">{{
+          period.toString().padStart(2, "0")
+        }}</span>
+        <scoreboard-add-substract-arrow
+          [value]="this.period > 1"
+          [disabledClick]="score.disabledClick"
+          [clickPause]="clickPause"
+          (backArrow)="this.onClickBackPeriod()"
+          (nextArrow)="this.onClickNextPeriod()"
+        />
+      </div>
+      <div class="d-flex flex-column fouls">
+        <h1 class="timeout">TIMEOUTS</h1>
+        <span (click)="!clickPause && this.onClickNextTimeoutVisit()">{{
+          timeouts.timeoutsVisit.toString().padStart(2, "0")
+        }}</span>
+        <scoreboard-add-substract-arrow
+          [value]="this.timeouts.timeoutsVisit > 0"
+          [disabledClick]="score.disabledClick"
+          [clickPause]="clickPause"
+          (backArrow)="this.onClickBackTimeoutVisit()"
+          (nextArrow)="this.onClickNextTimeoutVisit()"
+        />
+      </div>
+    </div>
+  </div>
+</div>

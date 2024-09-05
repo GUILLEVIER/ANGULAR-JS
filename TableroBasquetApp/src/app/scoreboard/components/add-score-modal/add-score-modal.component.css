@@ -1,0 +1,10 @@
+.btn-accept {
+  background-color: rgb(255, 0, 0) !important;
+  border: none;
+}
+
+.errors-title {
+  font-family: "Playfair Display", Courier, monospace;
+  padding: 0px 18px;
+  text-align: center;
+}
